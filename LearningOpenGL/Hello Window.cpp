@@ -2,6 +2,11 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);//
+void processInput(GLFWwindow* window)
+{
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+}
 int main()
 {
     //首先是要创建一个窗口，这里我们就是使用glfw来创建窗口，函数都是以glfw开头
@@ -28,6 +33,9 @@ int main()
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     while (!glfwWindowShouldClose(window))
     {
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f); //设置清除颜色
+		glClear(GL_COLOR_BUFFER_BIT); //清除颜色缓冲
+		processInput(window);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
